@@ -123,6 +123,35 @@
             animation: popIn 0.5s ease;
             box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
             border: 3px solid var(--primary-color);
+            position: relative;
+            min-width: 400px;
+        }
+
+        .result-close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 40px;
+            cursor: pointer;
+            color: #bbb;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            line-height: 1;
+            padding: 0;
+            font-weight: bold;
+        }
+
+        .result-close-btn:hover {
+            background: #f0f0f0;
+            color: #333;
+            transform: rotate(90deg);
         }
 
         @keyframes popIn {
@@ -225,6 +254,18 @@
             color: var(--primary-color);
             border-color: white;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 模态框中的科目按钮颜色修复 */
+        .modal-content .subject-btn:not(.active) {
+            color: #444;
+            background: rgba(0, 0, 0, 0.08);
+            border: 2px solid rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-content .subject-btn:not(.active):hover {
+            background: rgba(0, 0, 0, 0.15);
+            color: #222;
         }
 
         .header-center {
@@ -582,12 +623,15 @@
             transform: translate(-50%, -50%);
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.95));
             border-radius: 35px;
-            padding: 60px;
+            padding: 50px;
             z-index: 50;
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
             text-align: center;
             display: none;
             min-width: 550px;
+            max-width: 90vw;
+            max-height: 90vh;
+            overflow-y: auto;
             border: 4px solid var(--primary-color);
             backdrop-filter: blur(10px);
         }
@@ -600,14 +644,14 @@
         .score-panel h2 {
             color: var(--primary-color);
             font-size: 40px;
-            margin-bottom: 35px;
+            margin-bottom: 25px;
             font-weight: bold;
         }
 
         .score-student-name {
-            font-size: 52px;
+            font-size: 48px;
             font-weight: bold;
-            margin-bottom: 35px;
+            margin-bottom: 25px;
             color: #333;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
@@ -616,15 +660,15 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 18px;
-            margin-bottom: 35px;
+            gap: 15px;
+            margin-bottom: 25px;
         }
 
         .score-btn {
-            padding: 18px 45px;
+            padding: 16px 35px;
             border: none;
             border-radius: 30px;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -650,14 +694,14 @@
         }
 
         .current-score {
-            font-size: 30px;
+            font-size: 28px;
             color: #666;
-            margin-top: 25px;
+            margin-top: 15px;
             font-weight: bold;
         }
 
         .close-score-btn {
-            margin-top: 35px;
+            margin-top: 25px;
             padding: 15px 45px;
             border: none;
             border-radius: 25px;
@@ -673,6 +717,77 @@
             background: linear-gradient(135deg, #777, #555);
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 积分记录列表 */
+        .score-records-container {
+            margin-top: 20px;
+            max-height: 180px;
+            overflow-y: auto;
+            text-align: left;
+            border-top: 2px solid #eee;
+            padding-top: 15px;
+        }
+
+        .score-record-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            margin: 8px 0;
+            background: #f8f9fa;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.2s;
+        }
+
+        .score-record-item:hover {
+            background: #f0f0f0;
+            transform: translateX(5px);
+        }
+
+        .score-record-item .record-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .score-record-item .record-points {
+            font-weight: bold;
+            font-size: 18px;
+            min-width: 50px;
+        }
+
+        .score-record-item .record-time {
+            color: #999;
+            font-size: 13px;
+        }
+
+        .delete-record-btn {
+            background: #f44336;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 6px 14px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.2s;
+            margin-left: 10px;
+        }
+
+        .delete-record-btn:hover {
+            background: #d32f2f;
+            transform: scale(1.05);
+        }
+
+        .records-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #666;
+            text-align: center;
         }
 
         /* 科目选择器 */
@@ -802,6 +917,28 @@
             .volume-slider {
                 width: 100%;
             }
+
+            .score-panel {
+                min-width: 90vw;
+                padding: 30px 20px;
+            }
+
+            .score-student-name {
+                font-size: 32px;
+            }
+
+            .score-btn {
+                padding: 12px 20px;
+                font-size: 18px;
+                min-width: auto;
+                width: 100%;
+            }
+
+            #resultContent {
+                min-width: auto;
+                width: 90%;
+                padding: 40px 30px;
+            }
         }
 
         /* 滚动条美化 */
@@ -853,9 +990,10 @@
     <!-- 点名结果显示层 -->
     <div id="resultLayer">
         <div id="resultContent">
+            <button class="result-close-btn" onclick="closeResult()" title="关闭">×</button>
             <div id="resultSubject">语文课</div>
             <div id="resultName">张三</div>
-            <button class="main-btn" onclick="closeResult()">继续点名</button>
+            <button class="main-btn" onclick="closeResult()">✅ 完成</button>
         </div>
     </div>
 
@@ -870,7 +1008,11 @@
             <button class="score-btn subtract" onclick="addScore(-1)">需要改进 -1</button>
         </div>
         <div class="current-score">当前积分：<span id="currentScore">0</span></div>
-        <button class="close-score-btn" onclick="closeScorePanel()">关闭</button>
+        <div class="score-records-container" id="scoreRecords">
+            <div class="records-title">📋 积分记录</div>
+            <div style="text-align: center; color: #999; padding: 15px;">暂无积分记录</div>
+        </div>
+        <button class="close-score-btn" id="closeScoreBtn" onclick="closeScorePanel()">完成</button>
     </div>
 
     <!-- UI控制层 -->
@@ -1020,7 +1162,14 @@
                 '美术': [],
                 '体育': []
             },
-            scores: {},
+            scores: {
+                '语文': {},
+                '数学': {},
+                '英语': {},
+                '科学': {},
+                '美术': {},
+                '体育': {}
+            },
             currentStyle: 'pawpatrol',
             settings: {
                 avoidRepeat: false,
@@ -1033,6 +1182,8 @@
         let isRolling = false;
         let currentScoredStudent = null;
         let animationFrame = null;
+        let scoreQueue = [];
+        let currentScoreIndex = 0;
 
         // ==================== 风格主题配置 ====================
         const styleThemes = {
@@ -1094,10 +1245,64 @@
         function loadData() {
             const savedData = localStorage.getItem('awesomeRollCallSystem');
             if (savedData) {
-                appData = JSON.parse(savedData);
-                // 确保数据结构完整
-                if (!appData.students[appData.currentSubject]) {
-                    appData.students[appData.currentSubject] = [];
+                const parsed = JSON.parse(savedData);
+                appData = {...appData, ...parsed};
+
+                // 确保 students 结构完整
+                appData.subjects.forEach(subject => {
+                    if (!appData.students[subject]) {
+                        appData.students[subject] = [];
+                    }
+                });
+
+                // 积分数据迁移与初始化
+                if (!appData.scores) {
+                    appData.scores = {};
+                }
+
+                // 检测旧格式：积分直接以学生名为键
+                let hasOldFormat = false;
+                for (const key in appData.scores) {
+                    if (!appData.subjects.includes(key)) {
+                        const val = appData.scores[key];
+                        if (typeof val === 'number' || (typeof val === 'object' && val !== null && 'total' in val)) {
+                            hasOldFormat = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (hasOldFormat) {
+                    const oldScores = {...appData.scores};
+                    // 保留已经是新格式的科目数据
+                    appData.scores = {};
+                    appData.subjects.forEach(subject => {
+                        appData.scores[subject] = oldScores[subject] || {};
+                    });
+                    // 迁移旧格式数据到当前科目
+                    Object.entries(oldScores).forEach(([name, data]) => {
+                        if (appData.subjects.includes(name)) return;
+                        if (typeof data === 'object' && 'total' in data) {
+                            appData.scores[appData.currentSubject][name] = {
+                                total: data.total,
+                                records: []
+                            };
+                        } else if (typeof data === 'number') {
+                            appData.scores[appData.currentSubject][name] = {
+                                total: data,
+                                records: []
+                            };
+                        }
+                    });
+                    saveData();
+                    showToast('数据已升级至新版本！', 'success');
+                } else {
+                    // 新格式：确保每个科目都有积分对象
+                    appData.subjects.forEach(subject => {
+                        if (!appData.scores[subject]) {
+                            appData.scores[subject] = {};
+                        }
+                    });
                 }
             }
         }
@@ -1606,8 +1811,8 @@
             const sphere = document.getElementById('sphere');
             sphere.style.animation = 'rotateSphere 2s linear infinite';
 
-            // 8-12秒后停止
-            const duration = 8000 + Math.random() * 4000;
+            // 6秒后停止
+            const duration = 6000;
             setTimeout(() => {
                 stopRollCall();
             }, duration);
@@ -1673,17 +1878,18 @@
 
             resultLayer.style.display = 'flex';
 
-            // 如果只选了一个学生，显示积分面板
-            if (selected.length === 1 && document.getElementById('enableScore').checked) {
+            // 如果启用积分，设置队列并逐个评分
+            if (document.getElementById('enableScore').checked && selected.length > 0) {
+                scoreQueue = [...selected];
+                currentScoreIndex = 0;
                 setTimeout(() => {
-                    showScorePanel(selected[0]);
-                }, 1500); // 增加延迟确保积分面板稳定显示
+                    showScorePanel(scoreQueue[0]);
+                }, 800);
             }
         }
 
         function closeResult() {
             document.getElementById('resultLayer').style.display = 'none';
-            closeScorePanel();
         }
 
         // ==================== 积分系统 ====================
@@ -1691,54 +1897,130 @@
             currentScoredStudent = studentName;
             document.getElementById('scoreStudentName').textContent = studentName;
             document.getElementById('currentScore').textContent = getScore(studentName);
+
+            // 更新按钮文字：多人时显示"下一位"，最后一人显示"完成"
+            const closeBtn = document.getElementById('closeScoreBtn');
+            if (scoreQueue.length > 1 && currentScoreIndex < scoreQueue.length - 1) {
+                closeBtn.textContent = `下一位：${scoreQueue[currentScoreIndex + 1]} →`;
+            } else {
+                closeBtn.textContent = '完成';
+            }
+
+            renderScoreRecords();
             document.getElementById('scorePanel').classList.add('active');
         }
 
         function closeScorePanel() {
             document.getElementById('scorePanel').classList.remove('active');
             currentScoredStudent = null;
+
+            // 如果还有下一位，继续显示
+            currentScoreIndex++;
+            if (currentScoreIndex < scoreQueue.length) {
+                setTimeout(() => {
+                    showScorePanel(scoreQueue[currentScoreIndex]);
+                }, 200);
+            } else {
+                scoreQueue = [];
+                currentScoreIndex = 0;
+            }
         }
 
-        function getScore(student) {
-            if (typeof appData.scores[student] === 'object') {
-                return appData.scores[student].total || 0;
+        function getScore(student, subject) {
+            subject = subject || appData.currentSubject;
+            const subjectScores = appData.scores[subject] || {};
+            const data = subjectScores[student];
+            if (data && typeof data === 'object') {
+                return data.total || 0;
             }
-            return appData.scores[student] || 0;
+            return 0;
         }
 
         function addScore(points) {
             if (!currentScoredStudent) return;
+            const subject = appData.currentSubject;
 
-            // 初始化积分数据结构
-            if (!appData.scores[currentScoredStudent]) {
-                appData.scores[currentScoredStudent] = {
-                    total: 0,
-                    lastUpdate: new Date().toLocaleString('zh-CN')
-                };
-            } else if (typeof appData.scores[currentScoredStudent] !== 'object') {
-                // 兼容旧数据格式
-                appData.scores[currentScoredStudent] = {
-                    total: appData.scores[currentScoredStudent],
-                    lastUpdate: new Date().toLocaleString('zh-CN')
-                };
+            if (!appData.scores[subject]) {
+                appData.scores[subject] = {};
+            }
+            if (!appData.scores[subject][currentScoredStudent]) {
+                appData.scores[subject][currentScoredStudent] = { total: 0, records: [] };
             }
 
-            // 更新积分
-            appData.scores[currentScoredStudent].total += points;
+            const record = {
+                id: Date.now(),
+                points: points,
+                time: new Date().toLocaleString('zh-CN')
+            };
 
-            // 确保积分不为负数
-            if (appData.scores[currentScoredStudent].total < 0) {
-                appData.scores[currentScoredStudent].total = 0;
+            appData.scores[subject][currentScoredStudent].records.push(record);
+            appData.scores[subject][currentScoredStudent].total += points;
+
+            if (appData.scores[subject][currentScoredStudent].total < 0) {
+                appData.scores[subject][currentScoredStudent].total = 0;
             }
-
-            // 更新时间
-            appData.scores[currentScoredStudent].lastUpdate = new Date().toLocaleString('zh-CN');
 
             saveData();
             document.getElementById('currentScore').textContent = getScore(currentScoredStudent);
+            renderScoreRecords();
 
             const message = points > 0 ? `+${points}分！` : `${points}分`;
             showToast(`${currentScoredStudent} ${message}`, points > 0 ? 'success' : 'warning');
+        }
+
+        function renderScoreRecords() {
+            const container = document.getElementById('scoreRecords');
+            if (!currentScoredStudent) {
+                container.innerHTML = '<div class="records-title">📋 积分记录</div><div style="text-align: center; color: #999; padding: 15px;">暂无积分记录</div>';
+                return;
+            }
+
+            const subject = appData.currentSubject;
+            const studentData = appData.scores[subject] && appData.scores[subject][currentScoredStudent];
+
+            if (!studentData || !studentData.records || studentData.records.length === 0) {
+                container.innerHTML = '<div class="records-title">📋 积分记录</div><div style="text-align: center; color: #999; padding: 15px;">暂无积分记录</div>';
+                return;
+            }
+
+            // 倒序显示（最新的在上面）
+            const records = [...studentData.records].reverse();
+            let html = '<div class="records-title">📋 积分记录（点击可删除）</div>';
+            records.forEach(record => {
+                const color = record.points > 0 ? '#4CAF50' : '#f44336';
+                const sign = record.points > 0 ? '+' : '';
+                html += `
+                    <div class="score-record-item">
+                        <div class="record-info">
+                            <span class="record-points" style="color: ${color};">${sign}${record.points}分</span>
+                            <span class="record-time">${record.time}</span>
+                        </div>
+                        <button class="delete-record-btn" onclick="deleteScoreRecord(${record.id})">删除</button>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function deleteScoreRecord(recordId) {
+            const subject = appData.currentSubject;
+            const student = currentScoredStudent;
+            if (!student || !appData.scores[subject] || !appData.scores[subject][student]) return;
+
+            const records = appData.scores[subject][student].records;
+            const index = records.findIndex(r => r.id === recordId);
+            if (index > -1) {
+                const points = records[index].points;
+                appData.scores[subject][student].total -= points;
+                if (appData.scores[subject][student].total < 0) {
+                    appData.scores[subject][student].total = 0;
+                }
+                records.splice(index, 1);
+                saveData();
+                document.getElementById('currentScore').textContent = getScore(student);
+                renderScoreRecords();
+                showToast('已删除该积分记录', 'success');
+            }
         }
 
         // ==================== 科目管理 ====================
@@ -1854,33 +2136,44 @@
 
         // ==================== 积分导出功能 ====================
         function exportScores() {
-            const scores = appData.scores;
+            const subject = appData.currentSubject;
+            const scores = appData.scores[subject] || {};
             const data = [];
 
             Object.entries(scores).forEach(([name, scoreData]) => {
                 if (typeof scoreData === 'object') {
-                    data.push([
-                        scoreData.lastUpdate || '',
-                        name,
-                        scoreData.total || 0
-                    ]);
-                } else {
-                    // 兼容旧数据格式
-                    data.push([
-                        new Date().toLocaleString('zh-CN'),
-                        name,
-                        scoreData || 0
-                    ]);
+                    if (scoreData.records && scoreData.records.length > 0) {
+                        scoreData.records.forEach(record => {
+                            data.push([
+                                record.time || '',
+                                name,
+                                record.points,
+                                scoreData.total
+                            ]);
+                        });
+                    } else if (scoreData.total > 0) {
+                        // 有总分但没有记录（迁移的旧数据）
+                        data.push([
+                            '',
+                            name,
+                            scoreData.total,
+                            scoreData.total
+                        ]);
+                    }
                 }
             });
 
-            // 按积分排序
-            data.sort((a, b) => b[2] - a[2]);
+            // 按时间排序（新的在前）
+            data.sort((a, b) => {
+                if (!a[0]) return 1;
+                if (!b[0]) return -1;
+                return new Date(b[0]) - new Date(a[0]);
+            });
 
-            const ws = XLSX.utils.aoa_to_sheet([['时间', '姓名', '积分累计'], ...data]);
+            const ws = XLSX.utils.aoa_to_sheet([['时间', '姓名', '本次积分', '积分累计'], ...data]);
             const wb = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(wb, ws, '积分数据');
-            XLSX.writeFile(wb, '积分数据.xlsx');
+            XLSX.writeFile(wb, `${subject}积分数据.xlsx`);
             showToast('积分数据已导出！', 'success');
         }
 
@@ -1952,6 +2245,7 @@
             if (newSubject && !appData.subjects.includes(newSubject)) {
                 appData.subjects.push(newSubject);
                 appData.students[newSubject] = [];
+                appData.scores[newSubject] = {};
                 saveData();
                 updateModalSubjectButtons();
                 updateSettingsSubjectButtons();
@@ -1969,6 +2263,7 @@
                 if (index > -1) {
                     appData.subjects.splice(index, 1);
                     delete appData.students[subject];
+                    delete appData.scores[subject];
                     saveData();
                     updateModalSubjectButtons();
                     updateSettingsSubjectButtons();
@@ -2004,14 +2299,13 @@
         function showScoreBoard() {
             const modal = document.getElementById('scoreBoardModal');
             const content = document.getElementById('scoreBoardContent');
+            const subject = appData.currentSubject;
+            const scores = appData.scores[subject] || {};
 
-            // 转换数据格式
             const scoreData = [];
-            Object.entries(appData.scores).forEach(([name, data]) => {
+            Object.entries(scores).forEach(([name, data]) => {
                 if (typeof data === 'object') {
                     scoreData.push({name: name, score: data.total || 0});
-                } else {
-                    scoreData.push({name: name, score: data || 0});
                 }
             });
 
@@ -2020,7 +2314,8 @@
             if (sortedScores.length === 0) {
                 content.innerHTML = '<p style="text-align:center; font-size:28px; color:#999;">暂无积分记录</p>';
             } else {
-                content.innerHTML = '<div style="display:flex; flex-wrap:wrap; gap:18px; justify-content:center;">';
+                const wrapper = document.createElement('div');
+                wrapper.style.cssText = 'display:flex; flex-wrap:wrap; gap:18px; justify-content:center;';
                 sortedScores.forEach((item, index) => {
                     const div = document.createElement('div');
                     div.style.cssText = `
@@ -2040,9 +2335,10 @@
                         <div style="font-size:26px; color:#333; font-weight:bold;">${item.name}</div>
                         <div style="font-size:32px; color:${styleThemes[appData.currentStyle].primary}; font-weight:bold; margin-top:12px;">${item.score}分</div>
                     `;
-                    content.appendChild(div);
+                    wrapper.appendChild(div);
                 });
-                content.innerHTML += '</div>';
+                content.innerHTML = '';
+                content.appendChild(wrapper);
             }
 
             modal.classList.add('active');
